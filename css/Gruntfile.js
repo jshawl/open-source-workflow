@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
   //initialize our Grunt configuration object
   grunt.initConfig({
-  	//define a task named 'sass'
+  	//the 'sass' task
   	sass: {
   	  //output options
       dist: {
@@ -14,10 +14,22 @@ module.exports = function(grunt) {
           'css/style.css' : 'scss/style.scss'
         }
       }
+    },
+    // the 'watch' task
+    watch: {
+      //watch the scss directory
+      scss: {
+      	//watch any scss file
+        files: 'scss/*.scss',
+        //on any change, run the 'sass' task
+        tasks: ['sass']
+      }
     }
   });
-  //load our plugin
+  //load sass plugin
   grunt.loadNpmTasks('grunt-contrib-sass');
-  //register a default task
-  grunt.registerTask('default', ['sass']);
+  //load watch plugin
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  //make the default task 'watch', which watches and compiles Scss files
+  grunt.registerTask('default', ['watch']);
 };
